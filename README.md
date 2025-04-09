@@ -18,7 +18,8 @@
 ![image](https://github.com/user-attachments/assets/163c0ad2-942d-445f-8d9c-72fb85705f2f)
 
 ## 效果展示
-![image](https://github.com/user-attachments/assets/24025c71-507b-4ee4-9619-ed92e5a04b05)
+![image](https://github.com/user-attachments/assets/bc4d76ae-c8cd-4193-844d-76257e8a34e6)
+
 
 
 ## 🔧 本機啟動

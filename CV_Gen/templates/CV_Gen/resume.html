@@ -1,0 +1,85 @@
+<!-- CV_Gen/templates/CV_Gen/resume.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ user_profile.name }}'s Resume</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 10px;
+      line-height: 1.4;
+    }
+    /* 照片容器：無論置中或靠右，都設定下邊距 */
+    .photo-center,
+    .photo-right {
+      margin-bottom: 10px;
+    }
+    /* 置中照片：利用 display: block 與 margin auto */
+    .photo-center img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* 右對齊照片：利用 margin-left:auto 將圖片推至右側 */
+    .photo-right img {
+      display: block;
+      margin-left: auto;
+      margin-right: 0;
+    }
+    .profile-photo {
+      max-width: 120px; /* 調整圖片最大寬度 */
+      height: auto;
+    }
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 10px 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 14px;
+      margin: 8px 0;
+    }
+    .section-block {
+      margin-bottom: 15px;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  {% if photo_url %}
+    <div class="{% if photo_position == 'right' %}photo-right{% else %}photo-center{% endif %}">
+      <img src="{{ photo_url }}" alt="Profile Photo" class="profile-photo">
+      
+    </div>
+  {% endif %}
+  
+  <!-- 固定欄位：姓名、Email、Phone -->
+  <h1>{{ user_profile.name }}</h1>
+  <p>Email: {{ user_profile.email }}</p>
+  <p>Phone: {{ user_profile.phone }}</p>
+  <hr>
+  
+  <!-- 顯示動態額外欄位 -->
+  {% if user_profile.additional_sections %}
+    {% for sec in user_profile.additional_sections %}
+      <div class="section-block">
+        <h2>{{ sec.title }}</h2>
+        <div>{{ sec.content|safe }}</div>
+      </div>
+    <hr> 
+    {% endfor %}
+  {% else %}
+    <p>No additional sections provided.</p>
+  {% endif %}
+  
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Create CV - Dynamic Sections</title>
+  <script src="https://cdn.ckeditor.com/4.20.0/full/ckeditor.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { text-align: center; }
+    .dynamic-section { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    label { display: block; margin-bottom: 5px; }
+    input[type="text"], input[type="email"], input[type="file"], select {
+      width: 100%; max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Create CV</h1>
+  <form id="cv-form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <p>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+    </p>
+    <p>
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+    </p>
+    <p>
+      <label for="phone">Phone:</label>
+      <input type="text" name="phone" id="phone" required>
+    </p>
+    <p>
+      <label for="photo">Photo:</label>
+      <input type="file" name="photo" id="photo">
+    </p>
+    
+    <p>
+      <label for="photo_position">Photo Position:</label>
+      <select name="photo_position" id="photo_position">
+        <option value="center" selected>Center</option>
+        <option value="right">Right</option>
+      </select>
+    </p>
+
+    <hr>
+    <h2>Additional Sections</h2>
+    <p>
+      <select id="section-type">
+        <option value="Summary">Summary</option>
+        <option value="Skills">Skills</option>
+        <option value="Project">Project</option>
+        <option value="Award">Award</option>
+        <option value="Other">Other</option>
+      </select>
+      <button type="button" onclick="addSection()">Add Section</button>
+    </p>
+
+    <div id="additional-sections">
+      <!-- 動態欄位會在這裡新增 -->
+    </div>
+
+    <button type="submit">Submit</button>
+    <button type="button" onclick="previewPDF()">預覽 PDF</button>
+  </form>
+</div>
+
+<script>
+  let sectionCount = 0;
+
+  function addSection(){
+    const sectionType = document.getElementById("section-type").value;
+    sectionCount++;
+
+    const container = document.getElementById("additional-sections");
+    const div = document.createElement("div");
+    div.className = "dynamic-section";
+    div.innerHTML =
+      '<label>Section Title:</label>' +
+      '<input type="text" name="section_title_' + sectionCount + '" value="' + sectionType + '">' +
+      '<label>Content:</label>' +
+      '<textarea name="section_content_' + sectionCount + '" id="section_content_' + sectionCount + '"></textarea>' +
+      '<br><button type="button" onclick="removeSection(this)">Remove Section</button>';
+
+    container.appendChild(div);
+    CKEDITOR.replace('section_content_' + sectionCount);
+  }
+
+  function removeSection(btn){
+    const sectionDiv = btn.parentNode;
+    sectionDiv.parentNode.removeChild(sectionDiv);
+  }
+
+  function previewPDF() {
+    // 1. 先把所有 CKEditor 的內容同步回 textarea
+    for (let instance in CKEDITOR.instances) {
+      CKEDITOR.instances[instance].updateElement();
+    }
+
+    // 2. 複製原本的表單
+    const originalForm = document.getElementById("cv-form");
+    const previewForm = originalForm.cloneNode(true);
+    previewForm.action = "{% url 'preview_pdf' %}";
+    previewForm.method = "POST";
+    previewForm.target = "_blank";
+
+    // 3. 也複製 csrf token
+    const csrf = originalForm.querySelector('input[name=csrfmiddlewaretoken]');
+    if (csrf) {
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "csrfmiddlewaretoken";
+      hiddenInput.value = csrf.value;
+      previewForm.appendChild(hiddenInput);
+    }
+
+    document.body.appendChild(previewForm);
+    previewForm.submit();
+    document.body.removeChild(previewForm);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- CV_Gen/templates/CV_Gen/list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CV Profiles List</title>
+  <style>
+      body { font-family: sans-serif; margin: 20px; }
+      .profile-item { border-bottom: 1px solid #ccc; padding: 10px 0; }
+      .profile-item a { text-decoration: none; color: #0066CC; }
+  </style>
+</head>
+<body>
+  <h1>CV Profiles List</h1>
+  {% if profiles %}
+    {% for profile in profiles %}
+      <div class="profile-item">
+          <strong>{{ profile.name }}</strong><br>
+          Email: {{ profile.email }}<br>
+          Phone: {{ profile.phone }}<br>
+          <a href="{% url 'resume' profile.id %}">Download PDF</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No profiles available.</p>
+  {% endif %}
+</body>
+</html>

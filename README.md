@@ -14,10 +14,6 @@
 - CKEditor 4
 - pdfkit（wkhtmltopdf）
 
-## 📸 截圖展示
-![editor screenshot](screenshots/editor.png)
-![pdf preview](screenshots/preview.png)
-
 
 ## 🔧 本機啟動
 ```bash

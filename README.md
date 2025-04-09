@@ -13,6 +13,10 @@
 - Python 3 / Django 5
 - CKEditor 4
 - pdfkit（wkhtmltopdf）
+- ## 📸 截圖展示
+![editor screenshot](![image](https://github.com/user-attachments/assets/48bb0959-4131-4646-bd3b-c0f9e9d9eac3))
+![pdf preview](screenshots/preview.png)
+
 
 
 ## 🔧 本機啟動

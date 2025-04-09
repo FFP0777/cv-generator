@@ -5,11 +5,11 @@
 ## 🚀 Features
 - 多欄位動態編輯（Summary、Skills、Projects、Awards 等）
 - CKEditor 富文本支援
-- 圖片上傳與排版（支援左、右、置中）
+- 圖片上傳與排版（支援左、置中）
 - 即時產生 PDF 預覽
 - 支援本機圖片轉換與字型設定
 
-## 🛠 技術棧
+## 🛠 技術
 - Python 3 / Django 5
 - CKEditor 4
 - pdfkit（wkhtmltopdf）
@@ -19,9 +19,6 @@
 ![image](https://github.com/user-attachments/assets/48bb0959-4131-4646-bd3b-c0f9e9d9eac3)
 
 ![image](https://github.com/user-attachments/assets/24025c71-507b-4ee4-9619-ed92e5a04b05)
-
-
-
 
 
 ## 🔧 本機啟動

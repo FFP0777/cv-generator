@@ -1,7 +1,7 @@
 # CV Generator 網頁履歷產生器 📝
 
 > 使用 Django + pdfkit 所開發的履歷產生工具，支援 CKEditor 富文本、多欄位輸入、即時 PDF 預覽，避免排版與內容落差，可一鍵產出專業履歷 PDF，適合用於外商求職申請。
-
+![image](https://github.com/user-attachments/assets/bc4d76ae-c8cd-4193-844d-76257e8a34e6)
 ## 🚀 Features
 - 多欄位動態編輯（Summary、Skills、Projects、Awards 等）
 - CKEditor 富文本支援
@@ -17,8 +17,8 @@
 ## 網頁展示
 ![image](https://github.com/user-attachments/assets/163c0ad2-942d-445f-8d9c-72fb85705f2f)
 
-## 效果展示
-![image](https://github.com/user-attachments/assets/bc4d76ae-c8cd-4193-844d-76257e8a34e6)
+
+
 
 
 
